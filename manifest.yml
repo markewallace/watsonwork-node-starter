@@ -1,0 +1,4 @@
+applications:
+ - name: watsonwork-node-starter
+   random-route: true
+   memory: 256M
