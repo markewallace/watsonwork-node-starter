@@ -10,7 +10,6 @@ const webhookSecret = process.env.WEBHOOK_SECRET;
 const watsonworkUrl = 'https://api.watsonwork.ibm.com';
 
 const createTargetedMessage = (conversationId, targetUserId, targetDialogId) => {
-  //return `mutation {createTargetedMessage(input: {conversationId: "${conversationId}", targetUserId: "${targetUserId}", targetDialogId: "${targetDialogId}", attachments: [{type: CARD, cardInput: {type: INFORMATION, informationCardInput: {title: "File it?", subtitle: "tests", text: "test message", date: "1526046506357", buttons: [{text: "Yes", payload: "yes", style: PRIMARY}]}}}]}) {successful}}`;
   return `mutation {
     createTargetedMessage(input: {
       conversationId: "${conversationId}",
@@ -22,9 +21,9 @@ const createTargetedMessage = (conversationId, targetUserId, targetDialogId) => 
           cardInput: {
             type: INFORMATION,
             informationCardInput: {
-              title: "Card Title",
-              subtitle: "Card Subtitle",
-              text: "Card Text",
+              title: "Grid Demo",
+              subtitle: "/grid",
+              text: "{'type':'Page','dataSource':{'type':'memory','initialState':{'AccountName':'ACME Airlines','AccountNumber':'1234567'}},'props':{'renderForm':true},'children':[{'type':'TextInput','props':{'field':'AccountName','labelText':'Account Name: '}},{'type':'TextInput','props':{'field':'AccountNumber','labelText':'Account Number: '}},{'type':'Button','props':{'labelText':'Create Account','type':'submit'}}]}",
               date: "1526046506357",
               buttons: [
                 {
@@ -46,7 +45,7 @@ const createTargetedMessage = (conversationId, targetUserId, targetDialogId) => 
 const authenticateApp = (callback) => {
   const authenticationOptions = {
     'method': 'POST',
-    'url': 'https://api.watsonwork.ibm.com/oauth/token',
+    'url': `${watsonworkUrl}/oauth/token`,
     'auth': {
       'user': appId,
       'pass': appSecret
@@ -78,7 +77,7 @@ const sendMessage = (req) => {
 
     const sendMessageOptions = {
       'method': 'POST',
-      'url': 'https://api.watsonwork.ibm.com/graphql',
+      'url': `${watsonworkUrl}/graphql`,
       'headers': {
         'Authorization': `Bearer ${jwt}`,
         'Content-Type': 'application/graphql',
@@ -90,11 +89,11 @@ const sendMessage = (req) => {
     request(sendMessageOptions, (err, response, body) => {
       if(response.statusCode != 200) {
         console.log('Error creating targeted message.');
-        console.log(response.statusCode);
-        console.log(err);
-        console.log(body);
       }
-    });
+      console.log(response.statusCode);
+      console.log(err);
+      console.log(body);
+  });
   });
 };
 
