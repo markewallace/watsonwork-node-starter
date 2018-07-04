@@ -21,9 +21,9 @@ const createTargetedMessage = (conversationId, targetUserId, targetDialogId) => 
           cardInput: {
             type: INFORMATION,
             informationCardInput: {
-              title: "Grid Demo",
-              subtitle: "/grid",
-              text: "{'type':'Page','dataSource':{'type':'memory','initialState':{'AccountName':'ACME Airlines','AccountNumber':'1234567'}},'props':{'renderForm':true},'children':[{'type':'TextInput','props':{'field':'AccountName','labelText':'Account Name: '}},{'type':'TextInput','props':{'field':'AccountNumber','labelText':'Account Number: '}},{'type':'Button','props':{'labelText':'Create Account','type':'submit'}}]}",
+              title: "Card Title",
+              subtitle: "More information about this card",
+              text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio.",
               date: "1526046506357",
               buttons: [
                 {
